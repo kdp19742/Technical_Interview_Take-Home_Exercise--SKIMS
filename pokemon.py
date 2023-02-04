@@ -18,7 +18,7 @@ def get_pokemon_details():
     }
 
     # Make a GET request to the PokeAPI to retrieve the details for each pokemon
-    pokemons = []
+    pokemon = []
     base_happiness = []
     for name, id in favorite_pokemon_dict.items():
         pokemon_details = requests.get(f'https://pokeapi.co/api/v2/pokemon/{name}').json()
@@ -28,7 +28,7 @@ def get_pokemon_details():
         base_happiness.append(pokemon_species_details['base_happiness'])
 
         # Add the extracted attributes to the list of pokemons
-        pokemons.append({
+        pokemon.append({
             'name': pokemon_details['name'],
             'height': pokemon_details['height'],
             'weight': pokemon_details['weight'],
@@ -43,7 +43,7 @@ def get_pokemon_details():
 
     # Return the list of pokemons as a JSON response
     return jsonify({
-        'pokemons': pokemons,
+        'pokemon': pokemon,
         'average_base_happiness': avg_base_happiness,
         'median_base_happiness': median_base_happiness
     })
